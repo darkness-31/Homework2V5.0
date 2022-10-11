@@ -30,15 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Obama",
-            "12:30",
-            "3"}, -1);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialMaskedTextBox1 = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ImageList = new System.Windows.Forms.ImageList(this.components);
             this.TabMenu = new MaterialSkin.Controls.MaterialTabControl();
             this.TabMainMenu = new System.Windows.Forms.TabPage();
+            this.CreateTable = new MaterialSkin.Controls.MaterialButton();
             this.ListViewLesson = new MaterialSkin.Controls.MaterialListView();
             this.Lesson = new System.Windows.Forms.ColumnHeader();
             this.Time = new System.Windows.Forms.ColumnHeader();
@@ -53,6 +52,7 @@
             this.LableNameLesson = new MaterialSkin.Controls.MaterialLabel();
             this.NameLessonTextBox = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.TabTable = new System.Windows.Forms.TabPage();
+            this.DataGridLesson = new System.Windows.Forms.DataGridView();
             this.TabNewDocument = new System.Windows.Forms.TabPage();
             this.TabOpen = new System.Windows.Forms.TabPage();
             this.TabSave = new System.Windows.Forms.TabPage();
@@ -61,6 +61,8 @@
             this.TabQuit = new System.Windows.Forms.TabPage();
             this.TabMenu.SuspendLayout();
             this.TabMainMenu.SuspendLayout();
+            this.TabTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridLesson)).BeginInit();
             this.SuspendLayout();
             // 
             // materialMaskedTextBox1
@@ -150,13 +152,14 @@
             this.TabMenu.Multiline = true;
             this.TabMenu.Name = "TabMenu";
             this.TabMenu.SelectedIndex = 0;
-            this.TabMenu.Size = new System.Drawing.Size(768, 422);
+            this.TabMenu.Size = new System.Drawing.Size(791, 406);
             this.TabMenu.TabIndex = 0;
             // 
             // TabMainMenu
             // 
             this.TabMainMenu.BackColor = System.Drawing.Color.White;
             this.TabMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.TabMainMenu.Controls.Add(this.CreateTable);
             this.TabMainMenu.Controls.Add(this.ListViewLesson);
             this.TabMainMenu.Controls.Add(this.ButtonAddLesson);
             this.TabMainMenu.Controls.Add(this.LableColon);
@@ -171,9 +174,29 @@
             this.TabMainMenu.Location = new System.Drawing.Point(4, 74);
             this.TabMainMenu.Name = "TabMainMenu";
             this.TabMainMenu.Padding = new System.Windows.Forms.Padding(3);
-            this.TabMainMenu.Size = new System.Drawing.Size(760, 344);
+            this.TabMainMenu.Size = new System.Drawing.Size(783, 328);
             this.TabMainMenu.TabIndex = 0;
             this.TabMainMenu.Text = "Главная";
+            // 
+            // CreateTable
+            // 
+            this.CreateTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CreateTable.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.CreateTable.Depth = 0;
+            this.CreateTable.HighEmphasis = true;
+            this.CreateTable.Icon = null;
+            this.CreateTable.Location = new System.Drawing.Point(195, 267);
+            this.CreateTable.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.CreateTable.MouseState = MaterialSkin.MouseState.HOVER;
+            this.CreateTable.Name = "CreateTable";
+            this.CreateTable.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.CreateTable.Size = new System.Drawing.Size(205, 36);
+            this.CreateTable.TabIndex = 6;
+            this.CreateTable.Text = "Сформироват таблицу";
+            this.CreateTable.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.CreateTable.UseAccentColor = false;
+            this.CreateTable.UseVisualStyleBackColor = true;
+            this.CreateTable.Click += new System.EventHandler(this.CreateTable_Click);
             // 
             // ListViewLesson
             // 
@@ -188,17 +211,14 @@
             this.ListViewLesson.Depth = 0;
             this.ListViewLesson.Dock = System.Windows.Forms.DockStyle.Right;
             this.ListViewLesson.FullRowSelect = true;
-            listViewItem1.StateImageIndex = 0;
-            this.ListViewLesson.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.ListViewLesson.Location = new System.Drawing.Point(454, 3);
+            this.ListViewLesson.Location = new System.Drawing.Point(477, 3);
             this.ListViewLesson.MinimumSize = new System.Drawing.Size(200, 100);
             this.ListViewLesson.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ListViewLesson.MouseState = MaterialSkin.MouseState.OUT;
             this.ListViewLesson.Name = "ListViewLesson";
             this.ListViewLesson.OwnerDraw = true;
             this.ListViewLesson.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ListViewLesson.Size = new System.Drawing.Size(303, 338);
+            this.ListViewLesson.Size = new System.Drawing.Size(303, 322);
             this.ListViewLesson.TabIndex = 5;
             this.ListViewLesson.UseCompatibleStateImageBehavior = false;
             this.ListViewLesson.View = System.Windows.Forms.View.Details;
@@ -235,7 +255,7 @@
             this.ButtonAddLesson.Size = new System.Drawing.Size(155, 36);
             this.ButtonAddLesson.TabIndex = 4;
             this.ButtonAddLesson.Text = "Внести в список";
-            this.ButtonAddLesson.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.ButtonAddLesson.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ButtonAddLesson.UseAccentColor = false;
             this.ButtonAddLesson.UseVisualStyleBackColor = true;
             this.ButtonAddLesson.Click += new System.EventHandler(this.materialButton1_Click);
@@ -377,7 +397,7 @@
             this.NameLessonTextBox.SelectionLength = 0;
             this.NameLessonTextBox.SelectionStart = 0;
             this.NameLessonTextBox.ShortcutsEnabled = true;
-            this.NameLessonTextBox.Size = new System.Drawing.Size(358, 48);
+            this.NameLessonTextBox.Size = new System.Drawing.Size(375, 48);
             this.NameLessonTextBox.SkipLiterals = true;
             this.NameLessonTextBox.TabIndex = 0;
             this.NameLessonTextBox.TabStop = false;
@@ -390,13 +410,37 @@
             // TabTable
             // 
             this.TabTable.BackColor = System.Drawing.Color.White;
+            this.TabTable.Controls.Add(this.DataGridLesson);
             this.TabTable.ImageKey = "DB.png";
             this.TabTable.Location = new System.Drawing.Point(4, 74);
             this.TabTable.Name = "TabTable";
             this.TabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.TabTable.Size = new System.Drawing.Size(760, 344);
+            this.TabTable.Size = new System.Drawing.Size(783, 328);
             this.TabTable.TabIndex = 1;
             this.TabTable.Text = "Таблица";
+            // 
+            // DataGridLesson
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.DataGridLesson.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridLesson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridLesson.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridLesson.Location = new System.Drawing.Point(3, 3);
+            this.DataGridLesson.Name = "DataGridLesson";
+            this.DataGridLesson.RowTemplate.Height = 25;
+            this.DataGridLesson.Size = new System.Drawing.Size(777, 322);
+            this.DataGridLesson.TabIndex = 0;
             // 
             // TabNewDocument
             // 
@@ -404,7 +448,7 @@
             this.TabNewDocument.ImageKey = "Create.png";
             this.TabNewDocument.Location = new System.Drawing.Point(4, 74);
             this.TabNewDocument.Name = "TabNewDocument";
-            this.TabNewDocument.Size = new System.Drawing.Size(760, 344);
+            this.TabNewDocument.Size = new System.Drawing.Size(783, 328);
             this.TabNewDocument.TabIndex = 2;
             this.TabNewDocument.Text = "Создать";
             // 
@@ -414,7 +458,7 @@
             this.TabOpen.ImageKey = "Open File.png";
             this.TabOpen.Location = new System.Drawing.Point(4, 74);
             this.TabOpen.Name = "TabOpen";
-            this.TabOpen.Size = new System.Drawing.Size(760, 344);
+            this.TabOpen.Size = new System.Drawing.Size(783, 328);
             this.TabOpen.TabIndex = 3;
             this.TabOpen.Text = "Открыть";
             // 
@@ -424,7 +468,7 @@
             this.TabSave.ImageKey = "Save.png";
             this.TabSave.Location = new System.Drawing.Point(4, 74);
             this.TabSave.Name = "TabSave";
-            this.TabSave.Size = new System.Drawing.Size(760, 344);
+            this.TabSave.Size = new System.Drawing.Size(783, 328);
             this.TabSave.TabIndex = 4;
             this.TabSave.Text = "Сохранить";
             // 
@@ -434,7 +478,7 @@
             this.TabSaveAs.ImageKey = "SaveAs.png";
             this.TabSaveAs.Location = new System.Drawing.Point(4, 74);
             this.TabSaveAs.Name = "TabSaveAs";
-            this.TabSaveAs.Size = new System.Drawing.Size(760, 344);
+            this.TabSaveAs.Size = new System.Drawing.Size(783, 328);
             this.TabSaveAs.TabIndex = 5;
             this.TabSaveAs.Text = "Сохранить как...";
             // 
@@ -444,7 +488,7 @@
             this.TabSetting.ImageKey = "Settings.png";
             this.TabSetting.Location = new System.Drawing.Point(4, 74);
             this.TabSetting.Name = "TabSetting";
-            this.TabSetting.Size = new System.Drawing.Size(760, 344);
+            this.TabSetting.Size = new System.Drawing.Size(783, 328);
             this.TabSetting.TabIndex = 6;
             this.TabSetting.Text = "Настройки";
             // 
@@ -454,13 +498,13 @@
             this.TabQuit.ImageKey = "Close.png";
             this.TabQuit.Location = new System.Drawing.Point(4, 74);
             this.TabQuit.Name = "TabQuit";
-            this.TabQuit.Size = new System.Drawing.Size(760, 344);
+            this.TabQuit.Size = new System.Drawing.Size(783, 328);
             this.TabQuit.TabIndex = 7;
             this.TabQuit.Text = "Выйти";
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(774, 489);
+            this.ClientSize = new System.Drawing.Size(797, 473);
             this.Controls.Add(this.TabMenu);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.TabMenu;
@@ -470,6 +514,8 @@
             this.TabMenu.ResumeLayout(false);
             this.TabMainMenu.ResumeLayout(false);
             this.TabMainMenu.PerformLayout();
+            this.TabTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridLesson)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -501,5 +547,7 @@
         private ColumnHeader Lesson;
         private ColumnHeader Time;
         private ColumnHeader Count;
+        private MaterialSkin.Controls.MaterialButton CreateTable;
+        private DataGridView DataGridLesson;
     }
 }
