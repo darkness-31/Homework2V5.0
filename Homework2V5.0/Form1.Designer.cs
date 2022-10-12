@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialMaskedTextBox1 = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ImageList = new System.Windows.Forms.ImageList(this.components);
@@ -52,17 +52,19 @@
             this.LableNameLesson = new MaterialSkin.Controls.MaterialLabel();
             this.NameLessonTextBox = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.TabTable = new System.Windows.Forms.TabPage();
-            this.DataGridLesson = new System.Windows.Forms.DataGridView();
-            this.TabNewDocument = new System.Windows.Forms.TabPage();
-            this.TabOpen = new System.Windows.Forms.TabPage();
-            this.TabSave = new System.Windows.Forms.TabPage();
-            this.TabSaveAs = new System.Windows.Forms.TabPage();
+            this.GridLesson = new System.Windows.Forms.DataGridView();
             this.TabSetting = new System.Windows.Forms.TabPage();
-            this.TabQuit = new System.Windows.Forms.TabPage();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.SaveAsData = new MaterialSkin.Controls.MaterialButton();
+            this.SaveData = new MaterialSkin.Controls.MaterialButton();
+            this.QuitApp = new MaterialSkin.Controls.MaterialButton();
+            this.ImportData = new MaterialSkin.Controls.MaterialButton();
+            this.ClearList = new MaterialSkin.Controls.MaterialButton();
             this.TabMenu.SuspendLayout();
             this.TabMainMenu.SuspendLayout();
             this.TabTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridLesson)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridLesson)).BeginInit();
+            this.TabSetting.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialMaskedTextBox1
@@ -124,41 +126,37 @@
             this.ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.ImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ImageList.ImageStream")));
             this.ImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.ImageList.Images.SetKeyName(0, "Open File.png");
-            this.ImageList.Images.SetKeyName(1, "SaveAs.png");
-            this.ImageList.Images.SetKeyName(2, "Home.png");
-            this.ImageList.Images.SetKeyName(3, "Save.png");
-            this.ImageList.Images.SetKeyName(4, "Create.png");
-            this.ImageList.Images.SetKeyName(5, "DB.png");
-            this.ImageList.Images.SetKeyName(6, "Settings.png");
-            this.ImageList.Images.SetKeyName(7, "Close.png");
+            this.ImageList.Images.SetKeyName(0, "Close.png");
+            this.ImageList.Images.SetKeyName(1, "Create.png");
+            this.ImageList.Images.SetKeyName(2, "DB.png");
+            this.ImageList.Images.SetKeyName(3, "Home.png");
+            this.ImageList.Images.SetKeyName(4, "Open File.png");
+            this.ImageList.Images.SetKeyName(5, "Save.png");
+            this.ImageList.Images.SetKeyName(6, "SaveAs.png");
+            this.ImageList.Images.SetKeyName(7, "Settings.png");
             // 
             // TabMenu
             // 
             this.TabMenu.Controls.Add(this.TabMainMenu);
             this.TabMenu.Controls.Add(this.TabTable);
-            this.TabMenu.Controls.Add(this.TabNewDocument);
-            this.TabMenu.Controls.Add(this.TabOpen);
-            this.TabMenu.Controls.Add(this.TabSave);
-            this.TabMenu.Controls.Add(this.TabSaveAs);
             this.TabMenu.Controls.Add(this.TabSetting);
-            this.TabMenu.Controls.Add(this.TabQuit);
             this.TabMenu.Depth = 0;
             this.TabMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabMenu.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TabMenu.ImageList = this.ImageList;
-            this.TabMenu.Location = new System.Drawing.Point(3, 64);
+            this.TabMenu.Location = new System.Drawing.Point(0, 64);
             this.TabMenu.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabMenu.Multiline = true;
             this.TabMenu.Name = "TabMenu";
             this.TabMenu.SelectedIndex = 0;
-            this.TabMenu.Size = new System.Drawing.Size(791, 406);
+            this.TabMenu.Size = new System.Drawing.Size(810, 445);
             this.TabMenu.TabIndex = 0;
             // 
             // TabMainMenu
             // 
             this.TabMainMenu.BackColor = System.Drawing.Color.White;
             this.TabMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.TabMainMenu.Controls.Add(this.ClearList);
             this.TabMainMenu.Controls.Add(this.CreateTable);
             this.TabMainMenu.Controls.Add(this.ListViewLesson);
             this.TabMainMenu.Controls.Add(this.ButtonAddLesson);
@@ -171,10 +169,10 @@
             this.TabMainMenu.Controls.Add(this.LableNameLesson);
             this.TabMainMenu.Controls.Add(this.NameLessonTextBox);
             this.TabMainMenu.ImageKey = "Home.png";
-            this.TabMainMenu.Location = new System.Drawing.Point(4, 74);
+            this.TabMainMenu.Location = new System.Drawing.Point(4, 39);
             this.TabMainMenu.Name = "TabMainMenu";
             this.TabMainMenu.Padding = new System.Windows.Forms.Padding(3);
-            this.TabMainMenu.Size = new System.Drawing.Size(783, 328);
+            this.TabMainMenu.Size = new System.Drawing.Size(802, 402);
             this.TabMainMenu.TabIndex = 0;
             this.TabMainMenu.Text = "Главная";
             // 
@@ -211,14 +209,14 @@
             this.ListViewLesson.Depth = 0;
             this.ListViewLesson.Dock = System.Windows.Forms.DockStyle.Right;
             this.ListViewLesson.FullRowSelect = true;
-            this.ListViewLesson.Location = new System.Drawing.Point(477, 3);
+            this.ListViewLesson.Location = new System.Drawing.Point(496, 3);
             this.ListViewLesson.MinimumSize = new System.Drawing.Size(200, 100);
             this.ListViewLesson.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ListViewLesson.MouseState = MaterialSkin.MouseState.OUT;
             this.ListViewLesson.Name = "ListViewLesson";
             this.ListViewLesson.OwnerDraw = true;
             this.ListViewLesson.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ListViewLesson.Size = new System.Drawing.Size(303, 322);
+            this.ListViewLesson.Size = new System.Drawing.Size(303, 396);
             this.ListViewLesson.TabIndex = 5;
             this.ListViewLesson.UseCompatibleStateImageBehavior = false;
             this.ListViewLesson.View = System.Windows.Forms.View.Details;
@@ -410,112 +408,197 @@
             // TabTable
             // 
             this.TabTable.BackColor = System.Drawing.Color.White;
-            this.TabTable.Controls.Add(this.DataGridLesson);
+            this.TabTable.Controls.Add(this.GridLesson);
             this.TabTable.ImageKey = "DB.png";
-            this.TabTable.Location = new System.Drawing.Point(4, 74);
+            this.TabTable.Location = new System.Drawing.Point(4, 39);
             this.TabTable.Name = "TabTable";
             this.TabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.TabTable.Size = new System.Drawing.Size(783, 328);
+            this.TabTable.Size = new System.Drawing.Size(802, 402);
             this.TabTable.TabIndex = 1;
             this.TabTable.Text = "Таблица";
             // 
-            // DataGridLesson
+            // GridLesson
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.DataGridLesson.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DataGridLesson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridLesson.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataGridLesson.Location = new System.Drawing.Point(3, 3);
-            this.DataGridLesson.Name = "DataGridLesson";
-            this.DataGridLesson.RowTemplate.Height = 25;
-            this.DataGridLesson.Size = new System.Drawing.Size(777, 322);
-            this.DataGridLesson.TabIndex = 0;
-            // 
-            // TabNewDocument
-            // 
-            this.TabNewDocument.BackColor = System.Drawing.Color.White;
-            this.TabNewDocument.ImageKey = "Create.png";
-            this.TabNewDocument.Location = new System.Drawing.Point(4, 74);
-            this.TabNewDocument.Name = "TabNewDocument";
-            this.TabNewDocument.Size = new System.Drawing.Size(783, 328);
-            this.TabNewDocument.TabIndex = 2;
-            this.TabNewDocument.Text = "Создать";
-            // 
-            // TabOpen
-            // 
-            this.TabOpen.BackColor = System.Drawing.Color.White;
-            this.TabOpen.ImageKey = "Open File.png";
-            this.TabOpen.Location = new System.Drawing.Point(4, 74);
-            this.TabOpen.Name = "TabOpen";
-            this.TabOpen.Size = new System.Drawing.Size(783, 328);
-            this.TabOpen.TabIndex = 3;
-            this.TabOpen.Text = "Открыть";
-            // 
-            // TabSave
-            // 
-            this.TabSave.BackColor = System.Drawing.Color.White;
-            this.TabSave.ImageKey = "Save.png";
-            this.TabSave.Location = new System.Drawing.Point(4, 74);
-            this.TabSave.Name = "TabSave";
-            this.TabSave.Size = new System.Drawing.Size(783, 328);
-            this.TabSave.TabIndex = 4;
-            this.TabSave.Text = "Сохранить";
-            // 
-            // TabSaveAs
-            // 
-            this.TabSaveAs.BackColor = System.Drawing.Color.White;
-            this.TabSaveAs.ImageKey = "SaveAs.png";
-            this.TabSaveAs.Location = new System.Drawing.Point(4, 74);
-            this.TabSaveAs.Name = "TabSaveAs";
-            this.TabSaveAs.Size = new System.Drawing.Size(783, 328);
-            this.TabSaveAs.TabIndex = 5;
-            this.TabSaveAs.Text = "Сохранить как...";
+            this.GridLesson.BackgroundColor = System.Drawing.Color.White;
+            this.GridLesson.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GridLesson.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.GridLesson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridLesson.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridLesson.GridColor = System.Drawing.Color.White;
+            this.GridLesson.Location = new System.Drawing.Point(3, 3);
+            this.GridLesson.Name = "GridLesson";
+            this.GridLesson.ReadOnly = true;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.GridLesson.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.GridLesson.RowTemplate.Height = 25;
+            this.GridLesson.Size = new System.Drawing.Size(796, 396);
+            this.GridLesson.TabIndex = 0;
             // 
             // TabSetting
             // 
             this.TabSetting.BackColor = System.Drawing.Color.White;
+            this.TabSetting.Controls.Add(this.materialButton1);
+            this.TabSetting.Controls.Add(this.SaveAsData);
+            this.TabSetting.Controls.Add(this.SaveData);
+            this.TabSetting.Controls.Add(this.QuitApp);
+            this.TabSetting.Controls.Add(this.ImportData);
             this.TabSetting.ImageKey = "Settings.png";
-            this.TabSetting.Location = new System.Drawing.Point(4, 74);
+            this.TabSetting.Location = new System.Drawing.Point(4, 39);
             this.TabSetting.Name = "TabSetting";
-            this.TabSetting.Size = new System.Drawing.Size(783, 328);
+            this.TabSetting.Size = new System.Drawing.Size(802, 402);
             this.TabSetting.TabIndex = 6;
             this.TabSetting.Text = "Настройки";
             // 
-            // TabQuit
+            // materialButton1
             // 
-            this.TabQuit.BackColor = System.Drawing.Color.White;
-            this.TabQuit.ImageKey = "Close.png";
-            this.TabQuit.Location = new System.Drawing.Point(4, 74);
-            this.TabQuit.Name = "TabQuit";
-            this.TabQuit.Size = new System.Drawing.Size(783, 328);
-            this.TabQuit.TabIndex = 7;
-            this.TabQuit.Text = "Выйти";
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = global::Homework2V5._0.Properties.Resources.Open_File;
+            this.materialButton1.Location = new System.Drawing.Point(282, 23);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(164, 36);
+            this.materialButton1.TabIndex = 2;
+            this.materialButton1.Text = "Открыть файл";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            // 
+            // SaveAsData
+            // 
+            this.SaveAsData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SaveAsData.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.SaveAsData.Depth = 0;
+            this.SaveAsData.HighEmphasis = true;
+            this.SaveAsData.Icon = global::Homework2V5._0.Properties.Resources.Save;
+            this.SaveAsData.Location = new System.Drawing.Point(282, 119);
+            this.SaveAsData.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.SaveAsData.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SaveAsData.Name = "SaveAsData";
+            this.SaveAsData.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.SaveAsData.Size = new System.Drawing.Size(177, 36);
+            this.SaveAsData.TabIndex = 1;
+            this.SaveAsData.Text = "Сохранить как..";
+            this.SaveAsData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.SaveAsData.UseAccentColor = false;
+            this.SaveAsData.UseVisualStyleBackColor = true;
+            this.SaveAsData.Click += new System.EventHandler(this.SaveAsData_Click);
+            // 
+            // SaveData
+            // 
+            this.SaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SaveData.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.SaveData.Depth = 0;
+            this.SaveData.HighEmphasis = true;
+            this.SaveData.Icon = global::Homework2V5._0.Properties.Resources.Save;
+            this.SaveData.Location = new System.Drawing.Point(299, 71);
+            this.SaveData.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.SaveData.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SaveData.Name = "SaveData";
+            this.SaveData.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.SaveData.Size = new System.Drawing.Size(137, 36);
+            this.SaveData.TabIndex = 1;
+            this.SaveData.Text = "Сохранить";
+            this.SaveData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.SaveData.UseAccentColor = false;
+            this.SaveData.UseVisualStyleBackColor = true;
+            // 
+            // QuitApp
+            // 
+            this.QuitApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.QuitApp.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.QuitApp.Depth = 0;
+            this.QuitApp.HighEmphasis = true;
+            this.QuitApp.Icon = global::Homework2V5._0.Properties.Resources.Close;
+            this.QuitApp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.QuitApp.ImageKey = "(нет)";
+            this.QuitApp.Location = new System.Drawing.Point(320, 264);
+            this.QuitApp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.QuitApp.MouseState = MaterialSkin.MouseState.HOVER;
+            this.QuitApp.Name = "QuitApp";
+            this.QuitApp.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.QuitApp.Size = new System.Drawing.Size(101, 36);
+            this.QuitApp.TabIndex = 0;
+            this.QuitApp.Text = "Выйти";
+            this.QuitApp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.QuitApp.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.QuitApp.UseAccentColor = true;
+            this.QuitApp.UseVisualStyleBackColor = true;
+            this.QuitApp.Click += new System.EventHandler(this.materialButton1_Click_1);
+            // 
+            // ImportData
+            // 
+            this.ImportData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ImportData.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.ImportData.Depth = 0;
+            this.ImportData.HighEmphasis = true;
+            this.ImportData.Icon = global::Homework2V5._0.Properties.Resources.Create;
+            this.ImportData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ImportData.ImageKey = "(нет)";
+            this.ImportData.Location = new System.Drawing.Point(252, 167);
+            this.ImportData.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ImportData.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ImportData.Name = "ImportData";
+            this.ImportData.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.ImportData.Size = new System.Drawing.Size(246, 36);
+            this.ImportData.TabIndex = 0;
+            this.ImportData.Text = "Импортировать данные";
+            this.ImportData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ImportData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.ImportData.UseAccentColor = false;
+            this.ImportData.UseVisualStyleBackColor = true;
+            this.ImportData.Click += new System.EventHandler(this.materialButton1_Click_1);
+            // 
+            // ClearList
+            // 
+            this.ClearList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClearList.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.ClearList.Depth = 0;
+            this.ClearList.HighEmphasis = true;
+            this.ClearList.Icon = null;
+            this.ClearList.Location = new System.Drawing.Point(242, 315);
+            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ClearList.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ClearList.Name = "ClearList";
+            this.ClearList.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.ClearList.Size = new System.Drawing.Size(163, 36);
+            this.ClearList.TabIndex = 7;
+            this.ClearList.Text = "Очистить список";
+            this.ClearList.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.ClearList.UseAccentColor = false;
+            this.ClearList.UseVisualStyleBackColor = true;
+            this.ClearList.Click += new System.EventHandler(this.ClearList_Click);
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(797, 473);
+            this.ClientSize = new System.Drawing.Size(813, 512);
             this.Controls.Add(this.TabMenu);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.TabMenu;
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(0, 64, 3, 3);
+            this.Sizable = false;
             this.Text = "Расписание";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.TabMenu.ResumeLayout(false);
             this.TabMainMenu.ResumeLayout(false);
             this.TabMainMenu.PerformLayout();
             this.TabTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridLesson)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridLesson)).EndInit();
+            this.TabSetting.ResumeLayout(false);
+            this.TabSetting.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -528,12 +611,7 @@
         private MaterialSkin.Controls.MaterialTabControl TabMenu;
         private TabPage TabMainMenu;
         private TabPage TabTable;
-        private TabPage TabNewDocument;
-        private TabPage TabOpen;
-        private TabPage TabSave;
-        private TabPage TabSaveAs;
         private TabPage TabSetting;
-        private TabPage TabQuit;
         private MaterialSkin.Controls.MaterialLabel LableNameLesson;
         private MaterialSkin.Controls.MaterialMaskedTextBox NameLessonTextBox;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
@@ -548,6 +626,12 @@
         private ColumnHeader Time;
         private ColumnHeader Count;
         private MaterialSkin.Controls.MaterialButton CreateTable;
-        private DataGridView DataGridLesson;
+        private DataGridView GridLesson;
+        private MaterialSkin.Controls.MaterialButton ImportData;
+        private MaterialSkin.Controls.MaterialButton SaveAsData;
+        private MaterialSkin.Controls.MaterialButton SaveData;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton QuitApp;
+        private MaterialSkin.Controls.MaterialButton ClearList;
     }
 }
