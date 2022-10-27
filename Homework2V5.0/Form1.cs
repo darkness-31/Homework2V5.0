@@ -245,7 +245,9 @@ namespace Homework2V5._0
 
         private void Exit_Click(object sender, EventArgs e)
         {
-            HelpfulClass.SaveDataInDesktop(weekWork, listLessons);
+            if (weekWork.Count() != 0 &&
+                listLessons.Count() != 0)
+                HelpfulClass.SaveDataInDesktop(weekWork, listLessons);
             this.Close();
         }
 
@@ -255,28 +257,38 @@ namespace Homework2V5._0
             ofd.Filter = "json file (*.json)|*.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StreamReader sr = new StreamReader(ofd.FileName);
-                JObject json = JObject.Parse(sr.ReadToEnd());
-
-                listLessons.Clear();
-                LessonListView.Items.Clear();
-                foreach (var item in json["List"].Select(a => new ListLesson((string?)a["Name"],new TimeOnly((long)a["Time"]["Ticks"]))).ToList())
+                try
                 {
-                    listLessons.Add(item);
+                    StreamReader sr = new StreamReader(ofd.FileName);
+                    string RTE = sr.ReadToEnd();
+
+                    JObject json = JObject.Parse(RTE);
+
+                    listLessons.Clear();
+                    LessonListView.Items.Clear();
+                    foreach (var item in json["List"].Select(a => new ListLesson((string?)a["Name"], new TimeOnly((long)a["Time"]["Ticks"]))).ToList())
+                    {
+                        listLessons.Add(item);
+                    }
+
+                    weekWork.Clear();
+                    weekWork = json["Table"].Select(a => new WeekList
+                        (
+                            (string)a["NameWeek"],
+                            a["Lessons"].Select(i => new ListLesson
+                                (
+                                    (string)i["Name"],
+                                    new TimeOnly((long)i["Time"]["Ticks"])
+                                )).ToList()
+                        )).ToList();
+
+                    GridLesson.DataSource = HelpfulClass.GenerateTable(weekWork);
+
                 }
-
-                weekWork.Clear();
-                weekWork = json["Table"].Select(a => new WeekList
-                    (
-                        (string)a["NameWeek"],
-                        a["Lessons"].Select(i => new ListLesson
-                            (
-                                (string)i["Name"],
-                                new TimeOnly((long)i["Time"]["Ticks"])
-                            )).ToList()
-                    )).ToList();
-
-                GridLesson.DataSource = HelpfulClass.GenerateTable(weekWork);
+                catch (Exception ex)
+                {
+                        MessageBox.Show($"Неправильный json\n\n{ex}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
             }
         }
 

@@ -62,7 +62,17 @@ namespace Homework2V5._0
             };
 
             string json = JsonConvert.SerializeObject(temp, Formatting.Indented);
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Lesson.json", json);
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Lesson.json"))
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Lesson.json", json);
+            else
+            {
+                for(int i = 1; ; i++)
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @$"\Lesson{i}.json";
+                    if (!File.Exists(path))
+                        File.WriteAllText(Environment.GetFolderPath(path, json);
+                }
+            }
         }
         public static void SaveDataInFolder(string path,List<WeekList> tableWithWeek, ObservableCollection<ListLesson> listLesson)
         {
