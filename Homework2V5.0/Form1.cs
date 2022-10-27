@@ -245,7 +245,7 @@ namespace Homework2V5._0
 
         private void Exit_Click(object sender, EventArgs e)
         {
-            if (weekWork.Count() != 0 &&
+            if (weekWork.Count() != 0 ||
                 listLessons.Count() != 0)
                 HelpfulClass.SaveDataInDesktop(weekWork, listLessons);
             this.Close();

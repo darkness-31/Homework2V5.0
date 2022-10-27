@@ -70,7 +70,10 @@ namespace Homework2V5._0
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @$"\Lesson{i}.json";
                     if (!File.Exists(path))
-                        File.WriteAllText(Environment.GetFolderPath(path, json);
+                    {
+                        File.WriteAllText(path, json);
+                        return;
+                    }
                 }
             }
         }
