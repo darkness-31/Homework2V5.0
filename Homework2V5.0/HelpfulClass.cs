@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
@@ -52,24 +53,6 @@ namespace Homework2V5._0
             return displayName;
         }
 
-        public static string RandomLessonWeek(ListLesson listlesson, List<WeekList> weeklist)
-        {
-            Week random = (Week)new Random().Next((int)Week.Monday, (int)Week.Friday);
-            WeekList oneweek = weeklist.Where(i => i.Name == random.DisplayName()).First();
-
-            if (!oneweek.Lesson.Any(i => (i.Name == listlesson.Name) ||
-                                        (i.Name != listlesson.Name &&
-                                         i.Time == listlesson.Time)))
-                return oneweek.Name;
-            else if (weeklist.GroupBy(i => i.Name).Count() == 5)
-                return weeklist.FirstOrDefault(i => i.Name != oneweek.Name &&
-                                                    i.Lesson.Any(i => (i.Name != listlesson.Name) ||
-                                                                (i.Name == listlesson.Name &&
-                                                                 i.Time != listlesson.Time)))?.Name ?? Week.None.DisplayName();
-
-            return Week.None.DisplayName();
-        }
-
         public static void SaveDataInDesktop(List<WeekList> tableWithWeek, ObservableCollection<ListLesson> listLesson)
         {
             var temp = new
@@ -93,8 +76,11 @@ namespace Homework2V5._0
             File.WriteAllText(path, json);
         }
 
-        public static DataTable CreateTable(List<WeekList> week)
+        public static DataTable GenerateTable(List<WeekList> week)
         {
+            if (week.Count() == 0)
+                return new DataTable();
+            
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[]
             {
@@ -111,45 +97,59 @@ namespace Homework2V5._0
                 new DataColumn() {ColumnName = Week.Friday.ToString(),              Caption = "Пятница"}
             });
 
-            for (int i = 0; i < week.Max(i => i.Lesson.Count); i++)
+            List<ListLesson> LMonday =    week[0].Lessons;
+            List<ListLesson> LTuesday =   week[1].Lessons;
+            List<ListLesson> LWednesday = week[2].Lessons;
+            List<ListLesson> LThursday =  week[3].Lessons;
+            List<ListLesson> LFriday =    week[4].Lessons;
+
+            for (int i = 0; i < 6; i++)
             {
-                (string, string) Monday = (string.Empty, string.Empty);
-                (string, string) Tuesday = Monday;
-                (string, string) Wednesday = Monday;
-                (string, string) Thursday = Monday;
-                (string, string) Friday = Monday;
+                ListLesson Monday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Tuesday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Wednesday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Thursday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Friday = new ListLesson(string.Empty, new TimeOnly(0));
 
-                if (i == 6) break;
+                if (LMonday.Count() > i)
+                {
+                    Monday = LMonday[i];
+                }
+                if (LTuesday.Count() > i)
+                {
+                    Tuesday = LTuesday[i];
+                }
+                if (LWednesday.Count() > i)
+                {
+                    Wednesday = LWednesday[i];
+                }
+                if (LThursday.Count() > i)
+                {
+                    Thursday = LThursday[i];
+                }
+                if (LFriday.Count() > i)
+                {
+                    Friday = LFriday[i];
+                }
 
-                if (week.Where(i => i.Name == Week.Monday.DisplayName()).First().Lesson.Count() >= i + 1)
-                    Monday = (week.Where(i => i.Name == Week.Monday.DisplayName()).First().Lesson[i].Name,
-                              week.Where(i => i.Name == Week.Monday.DisplayName()).First().Lesson[i].Time.ToString());
-                if (week.Where(i => i.Name == Week.Tuesday.DisplayName()).First().Lesson.Count() >= i + 1)
-                    Tuesday = (week.Where(i => i.Name == Week.Tuesday.DisplayName()).First().Lesson[i].Name,
-                               week.Where(i => i.Name == Week.Tuesday.DisplayName()).First().Lesson[i].Time.ToString());
-                if (week.Where(i => i.Name == Week.Wednesday.DisplayName()).First().Lesson.Count() >= i + 1)
-                    Wednesday = (week.Where(i => i.Name == Week.Wednesday.DisplayName()).First().Lesson[i].Name,
-                                 week.Where(i => i.Name == Week.Wednesday.DisplayName()).First().Lesson[i].Time.ToString());
-                if (week.Where(i => i.Name == Week.Thursday.DisplayName()).First().Lesson.Count() >= i + 1)
-                    Thursday = (week.Where(i => i.Name == Week.Thursday.DisplayName()).First().Lesson[i].Name,
-                                week.Where(i => i.Name == Week.Thursday.DisplayName()).First().Lesson[i].Time.ToString());
-                if (week.Where(i => i.Name == Week.Friday.DisplayName()).First().Lesson.Count() >= i + 1)
-                    Friday = (week.Where(i => i.Name == Week.Friday.DisplayName()).First().Lesson[i].Name,
-                              week.Where(i => i.Name == Week.Friday.DisplayName()).First().Lesson[i].Time.ToString());
-                dt.Rows.Add(i + 1,
-                            Monday.Item2,
-                            Monday.Item1,
-                            Tuesday.Item2,
-                            Tuesday.Item1,
-                            Wednesday.Item2,
-                            Wednesday.Item1,
-                            Thursday.Item2,
-                            Thursday.Item1,
-                            Friday.Item2,
-                            Friday.Item1);
+                dt.Rows.Add
+                (
+                    i.ToString(),
+                    CheckTimeDayToString(Monday.Time),
+                    Monday.Name,
+                    CheckTimeDayToString(Tuesday.Time),
+                    Tuesday.Name,
+                    CheckTimeDayToString(Wednesday.Time),
+                    Wednesday.Name,
+                    CheckTimeDayToString(Thursday.Time),
+                    Thursday.Name,
+                    CheckTimeDayToString(Friday.Time),
+                    Friday.Name
+                );
             }
-
             return dt;
         }
+
+        public static string CheckTimeDayToString(TimeOnly time) => time == new TimeOnly(0) ? "" : time.ToString("H:mm");
     }
 }

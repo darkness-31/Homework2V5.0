@@ -14,7 +14,7 @@ namespace Homework2V5._0
     public partial class MainForm : MaterialForm
     {
         public ObservableCollection<ListLesson> listLessons = new ObservableCollection<ListLesson>();
-        public List<WeekList> WeekWorkTemp = new List<WeekList>();
+        public List<WeekList> weekWork = new List<WeekList>();
 
         public MainForm()
         {
@@ -118,45 +118,108 @@ namespace Homework2V5._0
                 return;
             }
 
-            TabMenu.Show();
-
-            List<WeekList> WorkWeek = new List<WeekList>()
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[]
             {
-                new WeekList(Week.Monday.DisplayName(), new List<ListLesson>()),
-                new WeekList(Week.Tuesday.DisplayName(), new List<ListLesson>()),
-                new WeekList(Week.Wednesday.DisplayName(), new List<ListLesson>()),
-                new WeekList(Week.Thursday.DisplayName(), new List<ListLesson>()),
-                new WeekList(Week.Friday.DisplayName(), new List<ListLesson>())
-            };
+                new DataColumn() {ColumnName = "CountLesson",                      Caption = "№"},
+                new DataColumn() {ColumnName = Week.Monday.ToString() + "Time",    Caption = " "},
+                new DataColumn() {ColumnName = Week.Monday.ToString(),             Caption = "Понидельник"},
+                new DataColumn() {ColumnName = Week.Tuesday.ToString() + "Time",   Caption = " "},
+                new DataColumn() {ColumnName = Week.Tuesday.ToString(),            Caption = "Вторник"},
+                new DataColumn() {ColumnName = Week.Wednesday.ToString() + "Time", Caption = " "},
+                new DataColumn() {ColumnName = Week.Wednesday.ToString(),           Caption = "Среда"},
+                new DataColumn() {ColumnName = Week.Thursday.ToString() + "Time",   Caption = " "},
+                new DataColumn() {ColumnName = Week.Thursday.ToString(),            Caption = "Четверг"},
+                new DataColumn() {ColumnName = Week.Friday.ToString() + "Time",     Caption = " "},
+                new DataColumn() {ColumnName = Week.Friday.ToString(),              Caption = "Пятница"}
+            });
+
+            List<ListLesson> LMonday = new List<ListLesson>(6);
+            List<ListLesson> LTuesday = new List<ListLesson>(6);
+            List<ListLesson> LWednesday = new List<ListLesson>(6);
+            List<ListLesson> LThursday = new List<ListLesson>(6);
+            List<ListLesson> LFriday = new List<ListLesson>(6);
 
             foreach (ListLesson item in listLessons)
             {
-                switch (HelpfulClass.RandomLessonWeek(item, WorkWeek))
+                switch (new Random().Next(0, 5))
                 {
-                    case "Monday":
-                        WorkWeek.First(i => i.Name == Week.Monday.DisplayName()).Lesson.Add(item);
+                    case (int)Week.Monday:
+                        LMonday.Add(item);
+                        LMonday = LMonday.OrderBy(i => i.Time).ToList<ListLesson>();
                         break;
-                    case "Tuesday":
-                        WorkWeek.First(i => i.Name == Week.Tuesday.DisplayName()).Lesson.Add(item);
+                    case (int)Week.Tuesday:
+                        LTuesday.Add(item);
+                        LTuesday = LTuesday.OrderBy(i => i.Time).ToList<ListLesson>();
                         break;
-                    case "Wednesday":
-                        WorkWeek.First(i => i.Name == Week.Wednesday.DisplayName()).Lesson.Add(item);
+                    case (int)Week.Wednesday:
+                        LWednesday.Add(item);
+                        LWednesday = LWednesday.OrderBy(i => i.Time).ToList<ListLesson>();
                         break;
-                    case "Thursday":
-                        WorkWeek.First(i => i.Name == Week.Thursday.DisplayName()).Lesson.Add(item);
+                    case (int)Week.Thursday:
+                        LThursday.Add(item);
+                        LThursday = LThursday.OrderBy(i => i.Time).ToList<ListLesson>();
                         break;
-                    case "Friday":
-                        WorkWeek.First(i => i.Name == Week.Friday.DisplayName()).Lesson.Add(item);
+                    case (int)Week.Friday:
+                        LFriday.Add(item);
+                        LFriday = LFriday.OrderBy(i => i.Time).ToList<ListLesson>();
                         break;
-                    default:
-                        break;
-                };
+                }
             }
 
-            WeekWorkTemp = WorkWeek;
+            weekWork.Add(new WeekList("Monday", LMonday));
+            weekWork.Add(new WeekList("Tuesday", LTuesday));
+            weekWork.Add(new WeekList("Wednesday", LWednesday));
+            weekWork.Add(new WeekList("Thursday", LThursday));
+            weekWork.Add(new WeekList("Friday", LFriday));
+
+            for (int i = 0; i < 6; i++)
+            {
+                ListLesson Monday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Tuesday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Wednesday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Thursday = new ListLesson(string.Empty, new TimeOnly(0));
+                ListLesson Friday = new ListLesson(string.Empty, new TimeOnly(0));
+
+                if (LMonday.Count() > i)
+                {
+                    Monday = LMonday[i];
+                }
+                if (LTuesday.Count() > i)
+                {
+                    Tuesday = LTuesday[i];
+                }
+                if (LWednesday.Count() > i)
+                {
+                    Wednesday = LWednesday[i];
+                }
+                if (LThursday.Count() > i)
+                {
+                    Thursday = LThursday[i];
+                }
+                if (LFriday.Count() > i)
+                {
+                    Friday = LFriday[i];
+                }
+
+                dt.Rows.Add
+                (
+                    (i + 1).ToString(),
+                    HelpfulClass.CheckTimeDayToString(Monday.Time),
+                    Monday.Name,
+                    HelpfulClass.CheckTimeDayToString(Tuesday.Time),
+                    Tuesday.Name,
+                    HelpfulClass.CheckTimeDayToString(Wednesday.Time),
+                    Wednesday.Name,
+                    HelpfulClass.CheckTimeDayToString(Thursday.Time),
+                    Thursday.Name,
+                    HelpfulClass.CheckTimeDayToString(Friday.Time),
+                    Friday.Name
+                );
+            }
 
             GridLesson.DataSource = new DataTable();
-            GridLesson.DataSource = HelpfulClass.CreateTable(WorkWeek);
+            GridLesson.DataSource = dt;
         }
 
         private void ClearList_Click(object sender, EventArgs e)
@@ -167,7 +230,7 @@ namespace Homework2V5._0
 
         private void SaveData_Click(object sender, EventArgs e)
         {
-            HelpfulClass.SaveDataInDesktop(WeekWorkTemp, listLessons);
+            HelpfulClass.SaveDataInDesktop(weekWork, listLessons);
         }
 
         private void SaveAsData_Click(object sender, EventArgs e)
@@ -176,13 +239,13 @@ namespace Homework2V5._0
             sfd.Filter = "json file (*.json)|*.json";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                HelpfulClass.SaveDataInFolder(sfd.FileName, WeekWorkTemp, listLessons);
+                HelpfulClass.SaveDataInFolder(sfd.FileName, weekWork, listLessons);
             }
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
-            HelpfulClass.SaveDataInDesktop(WeekWorkTemp, listLessons);
+            HelpfulClass.SaveDataInDesktop(weekWork, listLessons);
             this.Close();
         }
 
@@ -194,22 +257,67 @@ namespace Homework2V5._0
             {
                 StreamReader sr = new StreamReader(ofd.FileName);
                 JObject json = JObject.Parse(sr.ReadToEnd());
+
                 listLessons.Clear();
+                LessonListView.Items.Clear();
                 foreach (var item in json["List"].Select(a => new ListLesson((string?)a["Name"],new TimeOnly((long)a["Time"]["Ticks"]))).ToList())
                 {
                     listLessons.Add(item);
                 }
-                WeekWorkTemp.Clear();
-                WeekWorkTemp = json["Table"].Select(a => new WeekList
+
+                weekWork.Clear();
+                weekWork = json["Table"].Select(a => new WeekList
                     (
-                        (string)a["Name"],
-                        a["Lesson"].Select(i => new ListLesson
+                        (string)a["NameWeek"],
+                        a["Lessons"].Select(i => new ListLesson
                             (
                                 (string)i["Name"],
                                 new TimeOnly((long)i["Time"]["Ticks"])
                             )).ToList()
                     )).ToList();
-                GridLesson.DataSource = HelpfulClass.CreateTable(WeekWorkTemp);
+
+                GridLesson.DataSource = HelpfulClass.GenerateTable(weekWork);
+            }
+        }
+
+        private async void ExportFileTXT_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "text file (*.txt)|*.txt";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(ofd.FileName, System.Text.Encoding.UTF8);
+                string? line;
+                while((line = await sr.ReadLineAsync()) != null)
+                {
+                    listLessons.Add(new ListLesson(line, new TimeOnly(new Random().Next(8,18),new Random().Next(0,59))));
+                }
+            }
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!LessonListView.Focused)
+                return;
+
+            var _temp = LessonListView.FocusedItem;
+
+            if (_temp == null)
+                return;
+
+            var Name  = _temp.SubItems[0].Text;
+            var Time = _temp.SubItems[1].Text;
+            var Count = _temp.SubItems[2].Text;
+
+            foreach (var item in listLessons)
+            {
+                if (item.Name == Name &&
+                    item.Time.ToString("H:mm") == Time)
+                {
+                    listLessons.Remove(item);
+                    LessonListView.Items.Remove(_temp);
+                    return;
+                }
             }
         }
     }

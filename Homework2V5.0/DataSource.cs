@@ -20,13 +20,12 @@ namespace Homework2V5._0
 
     public class WeekList
     {
-        internal WeekList(string name, List<ListLesson> lesson)
+        public WeekList(string nameWeek, List<ListLesson> lessons)
         {
-            Name = name;
-            Lesson = lesson;
+            NameWeek = nameWeek;
+            Lessons = lessons;
         }
-
-        internal string Name { get; set; }
-        public List<ListLesson> Lesson { get; set; }
+        public string NameWeek { get; set; }
+        public List<ListLesson> Lessons { get; set; }
     }
 }

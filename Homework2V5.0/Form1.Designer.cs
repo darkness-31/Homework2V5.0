@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialMaskedTextBox1 = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ImageList = new System.Windows.Forms.ImageList(this.components);
@@ -43,6 +43,8 @@
             this.Lesson = new System.Windows.Forms.ColumnHeader();
             this.Time = new System.Windows.Forms.ColumnHeader();
             this.Count = new System.Windows.Forms.ColumnHeader();
+            this.contextMenuLessonList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ButtonAddLesson = new MaterialSkin.Controls.MaterialButton();
             this.LableColon = new MaterialSkin.Controls.MaterialLabel();
             this.LableMinuts = new MaterialSkin.Controls.MaterialLabel();
@@ -62,6 +64,7 @@
             this.ImportData = new MaterialSkin.Controls.MaterialButton();
             this.TabMenu.SuspendLayout();
             this.TabMainMenu.SuspendLayout();
+            this.contextMenuLessonList.SuspendLayout();
             this.TabTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridLesson)).BeginInit();
             this.TabSetting.SuspendLayout();
@@ -183,7 +186,7 @@
             this.ClearList.Depth = 0;
             this.ClearList.HighEmphasis = true;
             this.ClearList.Icon = null;
-            this.ClearList.Location = new System.Drawing.Point(242, 315);
+            this.ClearList.Location = new System.Drawing.Point(25, 315);
             this.ClearList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ClearList.MouseState = MaterialSkin.MouseState.HOVER;
             this.ClearList.Name = "ClearList";
@@ -226,6 +229,7 @@
             this.Lesson,
             this.Time,
             this.Count});
+            this.LessonListView.ContextMenuStrip = this.contextMenuLessonList;
             this.LessonListView.Depth = 0;
             this.LessonListView.Dock = System.Windows.Forms.DockStyle.Right;
             this.LessonListView.FullRowSelect = true;
@@ -257,6 +261,20 @@
             this.Count.Text = "Count";
             this.Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Count.Width = 100;
+            // 
+            // contextMenuLessonList
+            // 
+            this.contextMenuLessonList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DeleteToolStripMenuItem});
+            this.contextMenuLessonList.Name = "contextMenuLessonList";
+            this.contextMenuLessonList.Size = new System.Drawing.Size(119, 26);
+            // 
+            // DeleteToolStripMenuItem
+            // 
+            this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.DeleteToolStripMenuItem.Text = "Удалить";
+            this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // ButtonAddLesson
             // 
@@ -442,22 +460,22 @@
             this.GridLesson.BackgroundColor = System.Drawing.Color.White;
             this.GridLesson.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridLesson.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.GridLesson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridLesson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridLesson.GridColor = System.Drawing.Color.White;
             this.GridLesson.Location = new System.Drawing.Point(3, 3);
             this.GridLesson.Name = "GridLesson";
             this.GridLesson.ReadOnly = true;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            this.GridLesson.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.GridLesson.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.GridLesson.RowTemplate.Height = 25;
             this.GridLesson.Size = new System.Drawing.Size(796, 396);
             this.GridLesson.TabIndex = 0;
@@ -558,6 +576,7 @@
             this.QuitApp.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             this.QuitApp.UseAccentColor = true;
             this.QuitApp.UseVisualStyleBackColor = true;
+            this.QuitApp.Click += new System.EventHandler(this.Exit_Click);
             // 
             // ImportData
             // 
@@ -568,18 +587,19 @@
             this.ImportData.Icon = global::Homework2V5._0.Properties.Resources.Create;
             this.ImportData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ImportData.ImageKey = "(нет)";
-            this.ImportData.Location = new System.Drawing.Point(252, 167);
+            this.ImportData.Location = new System.Drawing.Point(214, 167);
             this.ImportData.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ImportData.MouseState = MaterialSkin.MouseState.HOVER;
             this.ImportData.Name = "ImportData";
             this.ImportData.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.ImportData.Size = new System.Drawing.Size(246, 36);
+            this.ImportData.Size = new System.Drawing.Size(314, 36);
             this.ImportData.TabIndex = 0;
-            this.ImportData.Text = "Импортировать данные";
+            this.ImportData.Text = "Импортировать названия уроки";
             this.ImportData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ImportData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ImportData.UseAccentColor = false;
             this.ImportData.UseVisualStyleBackColor = true;
+            this.ImportData.Click += new System.EventHandler(this.ExportFileTXT_Click);
             // 
             // MainForm
             // 
@@ -595,6 +615,7 @@
             this.TabMenu.ResumeLayout(false);
             this.TabMainMenu.ResumeLayout(false);
             this.TabMainMenu.PerformLayout();
+            this.contextMenuLessonList.ResumeLayout(false);
             this.TabTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridLesson)).EndInit();
             this.TabSetting.ResumeLayout(false);
@@ -633,5 +654,7 @@
         private MaterialSkin.Controls.MaterialButton OpenFile;
         private MaterialSkin.Controls.MaterialButton QuitApp;
         private MaterialSkin.Controls.MaterialButton ClearList;
+        private ContextMenuStrip contextMenuLessonList;
+        private ToolStripMenuItem DeleteToolStripMenuItem;
     }
 }
