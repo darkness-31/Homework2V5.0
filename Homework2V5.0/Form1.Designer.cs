@@ -30,15 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialMaskedTextBox1 = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ImageList = new System.Windows.Forms.ImageList(this.components);
             this.TabMenu = new MaterialSkin.Controls.MaterialTabControl();
             this.TabMainMenu = new System.Windows.Forms.TabPage();
+            this.ClearList = new MaterialSkin.Controls.MaterialButton();
             this.CreateTable = new MaterialSkin.Controls.MaterialButton();
-            this.ListViewLesson = new MaterialSkin.Controls.MaterialListView();
+            this.LessonListView = new MaterialSkin.Controls.MaterialListView();
             this.Lesson = new System.Windows.Forms.ColumnHeader();
             this.Time = new System.Windows.Forms.ColumnHeader();
             this.Count = new System.Windows.Forms.ColumnHeader();
@@ -54,12 +55,11 @@
             this.TabTable = new System.Windows.Forms.TabPage();
             this.GridLesson = new System.Windows.Forms.DataGridView();
             this.TabSetting = new System.Windows.Forms.TabPage();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.OpenFile = new MaterialSkin.Controls.MaterialButton();
             this.SaveAsData = new MaterialSkin.Controls.MaterialButton();
             this.SaveData = new MaterialSkin.Controls.MaterialButton();
             this.QuitApp = new MaterialSkin.Controls.MaterialButton();
             this.ImportData = new MaterialSkin.Controls.MaterialButton();
-            this.ClearList = new MaterialSkin.Controls.MaterialButton();
             this.TabMenu.SuspendLayout();
             this.TabMainMenu.SuspendLayout();
             this.TabTable.SuspendLayout();
@@ -158,7 +158,7 @@
             this.TabMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.TabMainMenu.Controls.Add(this.ClearList);
             this.TabMainMenu.Controls.Add(this.CreateTable);
-            this.TabMainMenu.Controls.Add(this.ListViewLesson);
+            this.TabMainMenu.Controls.Add(this.LessonListView);
             this.TabMainMenu.Controls.Add(this.ButtonAddLesson);
             this.TabMainMenu.Controls.Add(this.LableColon);
             this.TabMainMenu.Controls.Add(this.LableMinuts);
@@ -175,6 +175,26 @@
             this.TabMainMenu.Size = new System.Drawing.Size(802, 402);
             this.TabMainMenu.TabIndex = 0;
             this.TabMainMenu.Text = "Главная";
+            // 
+            // ClearList
+            // 
+            this.ClearList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClearList.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.ClearList.Depth = 0;
+            this.ClearList.HighEmphasis = true;
+            this.ClearList.Icon = null;
+            this.ClearList.Location = new System.Drawing.Point(242, 315);
+            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ClearList.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ClearList.Name = "ClearList";
+            this.ClearList.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.ClearList.Size = new System.Drawing.Size(163, 36);
+            this.ClearList.TabIndex = 7;
+            this.ClearList.Text = "Очистить список";
+            this.ClearList.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.ClearList.UseAccentColor = false;
+            this.ClearList.UseVisualStyleBackColor = true;
+            this.ClearList.Click += new System.EventHandler(this.ClearList_Click);
             // 
             // CreateTable
             // 
@@ -196,30 +216,30 @@
             this.CreateTable.UseVisualStyleBackColor = true;
             this.CreateTable.Click += new System.EventHandler(this.CreateTable_Click);
             // 
-            // ListViewLesson
+            // LessonListView
             // 
-            this.ListViewLesson.AutoSizeTable = false;
-            this.ListViewLesson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ListViewLesson.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListViewLesson.CheckBoxes = true;
-            this.ListViewLesson.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.LessonListView.AutoSizeTable = false;
+            this.LessonListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LessonListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LessonListView.CheckBoxes = true;
+            this.LessonListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Lesson,
             this.Time,
             this.Count});
-            this.ListViewLesson.Depth = 0;
-            this.ListViewLesson.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ListViewLesson.FullRowSelect = true;
-            this.ListViewLesson.Location = new System.Drawing.Point(496, 3);
-            this.ListViewLesson.MinimumSize = new System.Drawing.Size(200, 100);
-            this.ListViewLesson.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.ListViewLesson.MouseState = MaterialSkin.MouseState.OUT;
-            this.ListViewLesson.Name = "ListViewLesson";
-            this.ListViewLesson.OwnerDraw = true;
-            this.ListViewLesson.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ListViewLesson.Size = new System.Drawing.Size(303, 396);
-            this.ListViewLesson.TabIndex = 5;
-            this.ListViewLesson.UseCompatibleStateImageBehavior = false;
-            this.ListViewLesson.View = System.Windows.Forms.View.Details;
+            this.LessonListView.Depth = 0;
+            this.LessonListView.Dock = System.Windows.Forms.DockStyle.Right;
+            this.LessonListView.FullRowSelect = true;
+            this.LessonListView.Location = new System.Drawing.Point(496, 3);
+            this.LessonListView.MinimumSize = new System.Drawing.Size(200, 100);
+            this.LessonListView.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.LessonListView.MouseState = MaterialSkin.MouseState.OUT;
+            this.LessonListView.Name = "LessonListView";
+            this.LessonListView.OwnerDraw = true;
+            this.LessonListView.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LessonListView.Size = new System.Drawing.Size(303, 396);
+            this.LessonListView.TabIndex = 5;
+            this.LessonListView.UseCompatibleStateImageBehavior = false;
+            this.LessonListView.View = System.Windows.Forms.View.Details;
             // 
             // Lesson
             // 
@@ -422,22 +442,22 @@
             this.GridLesson.BackgroundColor = System.Drawing.Color.White;
             this.GridLesson.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridLesson.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridLesson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.GridLesson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridLesson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridLesson.GridColor = System.Drawing.Color.White;
             this.GridLesson.Location = new System.Drawing.Point(3, 3);
             this.GridLesson.Name = "GridLesson";
             this.GridLesson.ReadOnly = true;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.GridLesson.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.GridLesson.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.GridLesson.RowTemplate.Height = 25;
             this.GridLesson.Size = new System.Drawing.Size(796, 396);
             this.GridLesson.TabIndex = 0;
@@ -445,7 +465,7 @@
             // TabSetting
             // 
             this.TabSetting.BackColor = System.Drawing.Color.White;
-            this.TabSetting.Controls.Add(this.materialButton1);
+            this.TabSetting.Controls.Add(this.OpenFile);
             this.TabSetting.Controls.Add(this.SaveAsData);
             this.TabSetting.Controls.Add(this.SaveData);
             this.TabSetting.Controls.Add(this.QuitApp);
@@ -457,24 +477,25 @@
             this.TabSetting.TabIndex = 6;
             this.TabSetting.Text = "Настройки";
             // 
-            // materialButton1
+            // OpenFile
             // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = global::Homework2V5._0.Properties.Resources.Open_File;
-            this.materialButton1.Location = new System.Drawing.Point(282, 23);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(164, 36);
-            this.materialButton1.TabIndex = 2;
-            this.materialButton1.Text = "Открыть файл";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.OpenFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.OpenFile.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.OpenFile.Depth = 0;
+            this.OpenFile.HighEmphasis = true;
+            this.OpenFile.Icon = global::Homework2V5._0.Properties.Resources.Open_File;
+            this.OpenFile.Location = new System.Drawing.Point(282, 23);
+            this.OpenFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.OpenFile.MouseState = MaterialSkin.MouseState.HOVER;
+            this.OpenFile.Name = "OpenFile";
+            this.OpenFile.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.OpenFile.Size = new System.Drawing.Size(164, 36);
+            this.OpenFile.TabIndex = 2;
+            this.OpenFile.Text = "Открыть файл";
+            this.OpenFile.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.OpenFile.UseAccentColor = false;
+            this.OpenFile.UseVisualStyleBackColor = true;
+            this.OpenFile.Click += new System.EventHandler(this.OpenFile_Click);
             // 
             // SaveAsData
             // 
@@ -514,6 +535,7 @@
             this.SaveData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.SaveData.UseAccentColor = false;
             this.SaveData.UseVisualStyleBackColor = true;
+            this.SaveData.Click += new System.EventHandler(this.SaveData_Click);
             // 
             // QuitApp
             // 
@@ -536,7 +558,6 @@
             this.QuitApp.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             this.QuitApp.UseAccentColor = true;
             this.QuitApp.UseVisualStyleBackColor = true;
-            this.QuitApp.Click += new System.EventHandler(this.materialButton1_Click_1);
             // 
             // ImportData
             // 
@@ -559,27 +580,6 @@
             this.ImportData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ImportData.UseAccentColor = false;
             this.ImportData.UseVisualStyleBackColor = true;
-            this.ImportData.Click += new System.EventHandler(this.materialButton1_Click_1);
-            // 
-            // ClearList
-            // 
-            this.ClearList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClearList.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.ClearList.Depth = 0;
-            this.ClearList.HighEmphasis = true;
-            this.ClearList.Icon = null;
-            this.ClearList.Location = new System.Drawing.Point(242, 315);
-            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.ClearList.MouseState = MaterialSkin.MouseState.HOVER;
-            this.ClearList.Name = "ClearList";
-            this.ClearList.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.ClearList.Size = new System.Drawing.Size(163, 36);
-            this.ClearList.TabIndex = 7;
-            this.ClearList.Text = "Очистить список";
-            this.ClearList.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.ClearList.UseAccentColor = false;
-            this.ClearList.UseVisualStyleBackColor = true;
-            this.ClearList.Click += new System.EventHandler(this.ClearList_Click);
             // 
             // MainForm
             // 
@@ -620,7 +620,7 @@
         private MaterialSkin.Controls.MaterialLabel LableColon;
         private MaterialSkin.Controls.MaterialLabel LableMinuts;
         private MaterialSkin.Controls.MaterialComboBox ComboBoxMinuts;
-        private MaterialSkin.Controls.MaterialListView ListViewLesson;
+        private MaterialSkin.Controls.MaterialListView LessonListView;
         private MaterialSkin.Controls.MaterialButton ButtonAddLesson;
         private ColumnHeader Lesson;
         private ColumnHeader Time;
@@ -630,7 +630,7 @@
         private MaterialSkin.Controls.MaterialButton ImportData;
         private MaterialSkin.Controls.MaterialButton SaveAsData;
         private MaterialSkin.Controls.MaterialButton SaveData;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton OpenFile;
         private MaterialSkin.Controls.MaterialButton QuitApp;
         private MaterialSkin.Controls.MaterialButton ClearList;
     }
